@@ -12,6 +12,8 @@ const AnalogClock: React.FC = () => {
   const [startTime] = useAtom(atoms.startTimeAtom);
   const [endTime] = useAtom(atoms.endTimeAtom);
   const [audioAllowed, setAudioAllowed] = useState(false);
+  const [markerTimes, setMarkerTimes] = useState<string[]>([]);
+  const [endReached, setEndReached] = useState(false);
 
   useEffect(() => {
     const handleUserInteraction = () => {
@@ -29,36 +31,43 @@ const AnalogClock: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (!markers.length) {
+      return;
+    }
+    const intervalMinutes =
+      markers[0].unit === "hours"
+        ? markers[0].interval * 60
+        : markers[0].interval;
+    let markerTimes = generateMarkerTimes(startTime, endTime, intervalMinutes);
+    setMarkerTimes(markerTimes);
+    setEndReached(false);
+  }, [markers, startTime, endTime]);
+
+  useEffect(() => {
+    if (!markers.length) {
+      return;
+    }
+    if (endReached) return;
+
     const currentTime = `${value.getHours().toString().padStart(2, "0")}:${value
       .getMinutes()
       .toString()
-      .padStart(2, "0")}:${value.getSeconds().toString().padStart(2, "0")}`;
-    markers.forEach((marker) => {
-      const intervalMinutes =
-        marker.unit === "hours"
-          ? marker.interval * 60
-          : marker.unit === "seconds"
-          ? marker.interval / 60
-          : marker.interval;
-      const markerTimes = generateMarkerTimes(
-        startTime,
-        endTime,
-        intervalMinutes
-      );
-      console.log(
-        "marker time ===>",
-        markerTimes,
-        " | ",
-        "current time ===>",
-        currentTime
-      );
-      if (markerTimes.includes(currentTime)) {
-        playSound();
-      } else if (currentTime === endTime) {
-        playEndSound();
-      }
-    });
-  }, [value, markers, startTime, endTime]);
+      .padStart(2, "0")}`;
+    console.log(
+      "marker time ===>",
+      markerTimes,
+      " | ",
+      "current time ===>",
+      currentTime
+    );
+    if (markerTimes.includes(currentTime)) {
+      playSound();
+      setMarkerTimes(markerTimes.filter((time) => time !== currentTime)); // Remove the played time
+    } else if (currentTime === endTime) {
+      playEndSound();
+      setEndReached(true);
+    }
+  }, [value, markers, startTime, endTime, markerTimes, endReached]);
 
   const playSound = () => {
     if (audioAllowed) {
@@ -78,8 +87,8 @@ const AnalogClock: React.FC = () => {
   };
 
   const calculateMarkerPosition = (time: string) => {
-    const [hours, minutes, seconds] = time.split(":").map(Number);
-    const totalMinutes = hours * 60 + minutes + seconds / 60;
+    const [hours, minutes] = time.split(":").map(Number);
+    const totalMinutes = hours * 60 + minutes;
     const angle = (totalMinutes / 60) * 360; // 720 minutes in 12 hours
     const radius = 144; // Half of the clock size (72 * 2)
     const x = radius + radius * Math.cos((angle - 90) * (Math.PI / 180));
@@ -92,13 +101,10 @@ const AnalogClock: React.FC = () => {
     endTime: string,
     interval: number
   ) => {
-    const [startHours, startMinutes, startSeconds] = startTime
-      .split(":")
-      .map(Number);
-    const [endHours, endMinutes, endSeconds] = endTime.split(":").map(Number);
-    const startTotalMinutes =
-      startHours * 60 + startMinutes + startSeconds / 60;
-    const endTotalMinutes = endHours * 60 + endMinutes + endSeconds / 60;
+    const [startHours, startMinutes] = startTime.split(":").map(Number);
+    const [endHours, endMinutes] = endTime.split(":").map(Number);
+    const startTotalMinutes = startHours * 60 + startMinutes;
+    const endTotalMinutes = endHours * 60 + endMinutes;
 
     const times = [];
     for (
@@ -108,11 +114,10 @@ const AnalogClock: React.FC = () => {
     ) {
       const hours = Math.floor(time / 60);
       const minutes = Math.floor(time % 60);
-      const seconds = Math.floor((time * 60) % 60);
       times.push(
         `${hours.toString().padStart(2, "0")}:${minutes
           .toString()
-          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+          .padStart(2, "0")}`
       );
     }
     return times;
@@ -125,19 +130,15 @@ const AnalogClock: React.FC = () => {
         {/* Render clock face */}
         {markers.map((marker, index) => {
           const intervalMinutes =
-            marker.unit === "hours"
-              ? marker.interval * 60
-              : marker.unit === "seconds"
-              ? marker.interval / 60
-              : marker.interval;
-          const markerTimes = generateMarkerTimes(
+            marker.unit === "hours" ? marker.interval * 60 : marker.interval;
+          const displayMarkerTimes = generateMarkerTimes(
             startTime,
             endTime,
             intervalMinutes
           );
           return (
             <React.Fragment key={index}>
-              {markerTimes.map((time, idx) => {
+              {displayMarkerTimes.map((time, idx) => {
                 const { x, y } = calculateMarkerPosition(time);
                 return (
                   <div
