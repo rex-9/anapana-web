@@ -11,36 +11,11 @@ const AnalogClock: React.FC = () => {
   const { markers } = useMarker();
   const [startTime] = useAtom(atoms.startTimeAtom);
   const [endTime] = useAtom(atoms.endTimeAtom);
-  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
 
   useEffect(() => {
-    const requestWakeLock = async () => {
-      try {
-        const wakeLockSentinel = await navigator.wakeLock.request("screen");
-        setWakeLock(wakeLockSentinel);
-        wakeLockSentinel.addEventListener("release", () => {
-          console.log("Wake Lock was released");
-        });
-        console.log("Wake Lock is active");
-      } catch (err) {
-        if (err instanceof Error) {
-          console.error(`${err.name}, ${err.message}`);
-        } else {
-          console.error(err);
-        }
-      }
-    };
-
-    requestWakeLock();
-
     const interval = setInterval(() => setValue(new Date()), 1000);
-    return () => {
-      clearInterval(interval);
-      if (wakeLock) {
-        wakeLock.release();
-      }
-    };
-  }, [wakeLock]);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const currentTime = `${value.getHours().toString().padStart(2, "0")}:${value
@@ -85,7 +60,7 @@ const AnalogClock: React.FC = () => {
   const calculateMarkerPosition = (time: string) => {
     const [hours, minutes, seconds] = time.split(":").map(Number);
     const totalMinutes = hours * 60 + minutes + seconds / 60;
-    const angle = (totalMinutes / 60) * 360; // 60 minutes in the clock face
+    const angle = (totalMinutes / 60) * 360; // 720 minutes in 12 hours
     const radius = 144; // Half of the clock size (72 * 2)
     const x = radius + radius * Math.cos((angle - 90) * (Math.PI / 180));
     const y = radius + radius * Math.sin((angle - 90) * (Math.PI / 180));
