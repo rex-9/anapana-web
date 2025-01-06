@@ -45,6 +45,13 @@ const AnalogClock: React.FC = () => {
         endTime,
         intervalMinutes
       );
+      console.log(
+        "marker time ===>",
+        markerTimes,
+        " | ",
+        "current time ===>",
+        currentTime
+      );
       if (markerTimes.includes(currentTime)) {
         playSound();
       } else if (currentTime === endTime) {
