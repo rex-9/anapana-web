@@ -11,10 +11,21 @@ const AnalogClock: React.FC = () => {
   const { markers } = useMarker();
   const [startTime] = useAtom(atoms.startTimeAtom);
   const [endTime] = useAtom(atoms.endTimeAtom);
+  const [audioAllowed, setAudioAllowed] = useState(false);
 
   useEffect(() => {
+    const handleUserInteraction = () => {
+      setAudioAllowed(true);
+      document.removeEventListener("click", handleUserInteraction);
+    };
+
+    document.addEventListener("click", handleUserInteraction);
+
     const interval = setInterval(() => setValue(new Date()), 1000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("click", handleUserInteraction);
+    };
   }, []);
 
   useEffect(() => {
@@ -43,8 +54,10 @@ const AnalogClock: React.FC = () => {
   }, [value, markers, startTime, endTime]);
 
   const playSound = () => {
-    const audio = new Audio(assets.sounds.note.src);
-    audio.play();
+    if (audioAllowed) {
+      const audio = new Audio(assets.sounds.note.src);
+      audio.play();
+    }
   };
 
   const playEndSound = () => {
