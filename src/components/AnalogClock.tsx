@@ -138,6 +138,17 @@ const AnalogClock: React.FC = () => {
           );
           return (
             <React.Fragment key={index}>
+              {/* Render start time marker */}
+              <div
+                key={`start-${index}`}
+                className="absolute w-2 h-2 rounded-full"
+                style={{
+                  backgroundColor: "pink", // or any color you want for the start marker
+                  left: `${calculateMarkerPosition(startTime).x}px`,
+                  top: `${calculateMarkerPosition(startTime).y}px`,
+                  transform: "translate(-75%, -75%)",
+                }}
+              />
               {displayMarkerTimes.map((time, idx) => {
                 const { x, y } = calculateMarkerPosition(time);
                 return (
@@ -148,7 +159,7 @@ const AnalogClock: React.FC = () => {
                       backgroundColor: marker.color,
                       left: `${x}px`,
                       top: `${y}px`,
-                      transform: "translate(-50%, -50%)",
+                      transform: "translate(-75%, -75%)",
                     }}
                   />
                 );
@@ -161,7 +172,7 @@ const AnalogClock: React.FC = () => {
                   backgroundColor: "red", // or any color you want for the end marker
                   left: `${calculateMarkerPosition(endTime).x}px`,
                   top: `${calculateMarkerPosition(endTime).y}px`,
-                  transform: "translate(-50%, -50%)",
+                  transform: "translate(-75%, -75%)",
                 }}
               />
             </React.Fragment>
