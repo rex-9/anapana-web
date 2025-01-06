@@ -8,6 +8,9 @@ import sample from "./videos/sample.mp4";
 import insta from "./icons/instagram.svg"; // Asset icons
 import { MoonIcon, SunIcon } from "./icons"; // Lib icons
 
+// Import sounds
+import note from "./sounds/note.mp3";
+
 // Define TypeScript interfaces
 interface AssetProps {
   src: string;
@@ -49,4 +52,12 @@ const videos: Record<string, AssetProps> = {
   },
 };
 
-export default { images, icons, videos };
+const sounds: Record<string, AssetProps> = {
+  note: {
+    src: note,
+    alt: "note sound alt",
+    title: "note sound title",
+  },
+};
+
+export default { images, icons, videos, sounds };

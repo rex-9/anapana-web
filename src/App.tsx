@@ -3,7 +3,7 @@ import React from "react";
 import { LoadingOverlay } from "./components";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AppConfig from "./AppConfig";
-import { AuthProvider, LoadingProvider } from "./contexts";
+import { AuthProvider, LoadingProvider, MarkerProvider } from "./contexts";
 import { RouteManager } from "./routes";
 
 const App: React.FC = () => {
@@ -12,7 +12,9 @@ const App: React.FC = () => {
       <AuthProvider>
         <LoadingProvider>
           <LoadingOverlay />
-          <RouteManager />
+          <MarkerProvider>
+            <RouteManager />
+          </MarkerProvider>
         </LoadingProvider>
       </AuthProvider>
     </GoogleOAuthProvider>

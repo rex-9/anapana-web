@@ -15,3 +15,5 @@ export { default as IconButton } from "./IconButton";
 export { default as DropdownPicker } from "./DropdownPicker";
 export { default as NavBar } from "./NavBar";
 export { default as ProfileAvatar } from "./ProfileAvatar";
+export { default as AnalogClock } from "./AnalogClock";
+export { default as MarkerPopup } from "./MarkerPopup";

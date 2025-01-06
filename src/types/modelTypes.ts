@@ -8,3 +8,9 @@ export interface IUser {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface IMarker {
+  interval: number;
+  unit: "seconds" | "minutes" | "hours";
+  color: string;
+}

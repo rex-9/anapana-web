@@ -8,10 +8,19 @@ class AtomStorageService {
     this.atoms = Object.keys(localStorage).reduce((acc, key) => {
       acc[key] = atomWithStorage<any>(
         key,
-        JSON.parse(localStorage.getItem(key) as string)
+        this.safeParse(localStorage.getItem(key))
       );
       return acc;
     }, {} as Record<string, WritableAtom<any, any, void>>);
+  }
+
+  private safeParse(value: string | null): any {
+    try {
+      return value ? JSON.parse(value) : null;
+    } catch (e) {
+      console.warn(`Failed to parse value from localStorage: ${value}`, e);
+      return null;
+    }
   }
 
   getAtom<T>(key: string, initialValue: T): WritableAtom<T, any, void> {
