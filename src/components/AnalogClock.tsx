@@ -122,7 +122,7 @@ const AnalogClock: React.FC = () => {
                 return (
                   <div
                     key={`${index}-${idx}`}
-                    className="absolute w-2.5 h-2.5 rounded-full"
+                    className="absolute w-2 h-2 rounded-full"
                     style={{
                       backgroundColor: marker.color,
                       left: `${x}px`,
@@ -135,7 +135,7 @@ const AnalogClock: React.FC = () => {
               {/* Render end time marker */}
               <div
                 key={`end-${index}`}
-                className="absolute w-2.5 h-2.5 rounded-full"
+                className="absolute w-2 h-2 rounded-full"
                 style={{
                   backgroundColor: "red", // or any color you want for the end marker
                   left: `${calculateMarkerPosition(endTime).x}px`,
