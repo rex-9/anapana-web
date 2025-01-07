@@ -14,6 +14,7 @@ const AnalogClock: React.FC = () => {
   const [audioAllowed, setAudioAllowed] = useState(false);
   const [markerTimes, setMarkerTimes] = useState<string[]>([]);
   const [endReached, setEndReached] = useState(false);
+  const [wakeLock, setWakeLock] = useState<WakeLockSentinel | null>(null);
 
   useEffect(() => {
     const handleUserInteraction = () => {
@@ -68,6 +69,38 @@ const AnalogClock: React.FC = () => {
       setEndReached(true);
     }
   }, [value, markers, startTime, endTime, markerTimes, endReached]);
+
+  useEffect(() => {
+    const requestWakeLock = async () => {
+      try {
+        const wakeLockSentinel = await navigator.wakeLock.request("screen");
+        setWakeLock(wakeLockSentinel);
+        wakeLockSentinel.addEventListener("release", () => {
+          console.log("Wake Lock was released");
+        });
+        console.log("Wake Lock is active");
+      } catch (err) {
+        if (err instanceof Error) {
+          console.error(`${err.name}, ${err.message}`);
+        } else {
+          console.error(err);
+        }
+      }
+    };
+
+    requestWakeLock();
+
+    const wakeLockInterval = setInterval(() => {
+      requestWakeLock();
+    }, 5 * 60 * 1000); // 5 minutes
+
+    return () => {
+      clearInterval(wakeLockInterval);
+      if (wakeLock) {
+        wakeLock.release();
+      }
+    };
+  }, [wakeLock]);
 
   const playSound = () => {
     if (audioAllowed) {
