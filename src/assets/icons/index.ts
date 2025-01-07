@@ -1,3 +1,15 @@
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import {
+  MoonIcon,
+  SunIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  XCircleIcon,
+} from "@heroicons/react/24/solid";
 
-export { MoonIcon, SunIcon };
+export {
+  MoonIcon,
+  SunIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  XCircleIcon,
+};

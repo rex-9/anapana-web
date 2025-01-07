@@ -6,7 +6,13 @@ import sample from "./videos/sample.mp4";
 
 // Import icons
 import insta from "./icons/instagram.svg"; // Asset icons
-import { MoonIcon, SunIcon } from "./icons"; // Lib icons
+import {
+  MoonIcon,
+  SunIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  XCircleIcon,
+} from "./icons"; // Lib icons
 
 // Import sounds
 import note from "./sounds/note.mp3";
@@ -41,6 +47,9 @@ const icons: {
   lib: {
     sun: SunIcon,
     moon: MoonIcon,
+    checkCircle: CheckCircleIcon,
+    exclamationCircle: ExclamationCircleIcon,
+    xCircle: XCircleIcon,
   },
 };
 

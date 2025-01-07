@@ -5,8 +5,10 @@ import { useAtom } from "jotai";
 import atoms from "../atoms";
 import assets from "../assets";
 import { AppLocales } from "../locales/app_locales";
+import { useToast } from "../contexts";
 
 const MarkerPopup: React.FC = () => {
+  const { showToast } = useToast();
   const { addMarker, cleanMarkers } = useMarker();
   const [interval, setInterval] = useState(1);
   const [unit, setUnit] = useState<"minutes" | "hours">("minutes");
@@ -16,6 +18,7 @@ const MarkerPopup: React.FC = () => {
   const handleAddMarker = () => {
     const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
     addMarker({ interval, unit, color });
+    showToast("success", "Let's start the training of mindfulness!");
   };
 
   const playSound = () => {
