@@ -12,6 +12,7 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon,
   XCircleIcon,
+  HeartIcon,
 } from "./icons"; // Lib icons
 
 // Import sounds
@@ -50,6 +51,7 @@ const icons: {
     checkCircle: CheckCircleIcon,
     exclamationCircle: ExclamationCircleIcon,
     xCircle: XCircleIcon,
+    heart: HeartIcon,
   },
 };
 

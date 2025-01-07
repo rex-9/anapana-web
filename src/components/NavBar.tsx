@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
 
   return (
     <nav className="flex gap-2 justify-between items-center w-full p-2">
-      <div className="w-48">
+      <div className="md:w-48">
         <ProfileAvatar className="ml-auto" />
       </div>
       {t(AppLocales.AnapanaTimerTitle)}
