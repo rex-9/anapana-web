@@ -23,4 +23,18 @@ export enum AppLocales {
   Home = "home",
   GoBack = "go_back",
   Submit = "submit",
+
+  // Anapana Timer
+  AnapanaTimerTitle = "anapana_timer_title",
+  TimerStartTime = "timer_start_time",
+  TimerEndTime = "timer_end_time",
+  TimerInterval = "timer_interval",
+  TimerUnit = "timer_unit",
+  TimerStart = "timer_start",
+  TimerReset = "timer_reset",
+  TimerTestIntervalSound = "timer_test_interval_sound",
+  TimerTestEndingSound = "timer_test_ending_sound",
+  TimerSeconds = "timer_seconds",
+  TimerMinutes = "timer_minutes",
+  TimerHours = "timer_hours",
 }

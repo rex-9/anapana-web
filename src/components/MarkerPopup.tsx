@@ -4,6 +4,7 @@ import { TextButton, DropdownPicker, TextInput } from ".";
 import { useAtom } from "jotai";
 import atoms from "../atoms";
 import assets from "../assets";
+import { AppLocales } from "../locales/app_locales";
 
 const MarkerPopup: React.FC = () => {
   const { addMarker, cleanMarkers } = useMarker();
@@ -33,30 +34,30 @@ const MarkerPopup: React.FC = () => {
   };
 
   const unitOptions = [
-    { value: "minutes", label: "Minutes" },
-    { value: "hours", label: "Hours" },
+    { value: "minutes", label: AppLocales.TimerMinutes },
+    { value: "hours", label: AppLocales.TimerHours },
   ];
 
   return (
-    <div className="w-96 mt-5 flex flex-col items-center justify-center">
+    <div className="w-80 mt-5 flex flex-col items-center justify-center">
       <div className="w-full flex items-center justify-between gap-2">
         <TextButton
           className="w-fit mt-2"
           variant="flat"
           onClick={playSound}
-          label="Test Interval Sound"
+          label={AppLocales.TimerTestIntervalSound}
         />
         <TextButton
           className="w-fit mt-2"
           variant="flat"
           onClick={playEndSound}
-          label="Test Ending Sound"
+          label={AppLocales.TimerTestEndingSound}
         />
       </div>
       <TextInput
         containerClassName="w-full mt-2"
         id="start-time"
-        label="Start Time"
+        label={AppLocales.TimerStartTime}
         type="time"
         value={startTime}
         onChange={(e) => setStartTime(e.target.value)}
@@ -64,7 +65,7 @@ const MarkerPopup: React.FC = () => {
       <TextInput
         containerClassName="w-full mt-2"
         id="end-time"
-        label="End Time"
+        label={AppLocales.TimerEndTime}
         type="time"
         value={endTime}
         onChange={(e) => setEndTime(e.target.value)}
@@ -73,7 +74,7 @@ const MarkerPopup: React.FC = () => {
         <TextInput
           containerClassName="w-1/2"
           id="interval"
-          label="Interval"
+          label={AppLocales.TimerInterval}
           type="number"
           value={interval.toString()}
           onChange={(e) => setInterval(Number(e.target.value))}
@@ -90,13 +91,13 @@ const MarkerPopup: React.FC = () => {
         className="w-fit mt-2"
         variant="primary"
         onClick={handleAddMarker}
-        label="Set"
+        label={AppLocales.TimerStart}
       />
       <TextButton
         className="w-fit mt-2"
         variant="flat"
         onClick={cleanMarkers}
-        label="Clean"
+        label={AppLocales.TimerReset}
       />
     </div>
   );

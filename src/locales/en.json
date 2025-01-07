@@ -22,5 +22,18 @@
 
   "home": "Home",
   "go_back": "Go Back",
-  "submit": "Submit"
+  "submit": "Submit",
+
+  "anapana_timer_title": "Anapana Timer",
+  "timer_start_time": "Start Time",
+  "timer_end_time": "End Time",
+  "timer_interval": "Interval",
+  "timer_unit": "Unit",
+  "timer_start": "Start",
+  "timer_reset": "Reset",
+  "timer_test_interval_sound": "Test Interval Sound",
+  "timer_test_ending_sound": "Test Ending Sound",
+  "timer_seconds": "Seconds",
+  "timer_minutes": "Minutes",
+  "timer_hours": "Hours"
 }

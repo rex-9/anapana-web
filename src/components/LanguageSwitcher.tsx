@@ -12,6 +12,7 @@ const LanguageSwitcher: React.FC = () => {
   const languageOptions = [
     { value: "en", label: "🇺🇸 English" },
     { value: "es", label: "🇪🇸 Español" },
+    { value: "my", label: "🇲🇲 Burmese" },
     // Add more languages as needed
   ];
 

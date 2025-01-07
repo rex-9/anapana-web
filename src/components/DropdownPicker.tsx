@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface DropdownPickerProps {
   options: { value: string; label: string }[];
@@ -13,6 +14,7 @@ const DropdownPicker: React.FC<DropdownPickerProps> = ({
   onChange,
   className,
 }) => {
+  const { t } = useTranslation();
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(event.target.value);
   };
@@ -25,7 +27,7 @@ const DropdownPicker: React.FC<DropdownPickerProps> = ({
     >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
-          {option.label}
+          {t(option.label)}
         </option>
       ))}
     </select>
