@@ -105,6 +105,7 @@ const AnalogClock: React.FC = () => {
     const [endHours, endMinutes] = endTime.split(":").map(Number);
     const startTotalMinutes = startHours * 60 + startMinutes;
     const endTotalMinutes = endHours * 60 + endMinutes;
+    const currentTotalMinutes = value.getHours() * 60 + value.getMinutes();
 
     const times = [];
     for (
@@ -112,13 +113,15 @@ const AnalogClock: React.FC = () => {
       time <= endTotalMinutes;
       time += interval
     ) {
-      const hours = Math.floor(time / 60);
-      const minutes = Math.floor(time % 60);
-      times.push(
-        `${hours.toString().padStart(2, "0")}:${minutes
-          .toString()
-          .padStart(2, "0")}`
-      );
+      if (time > currentTotalMinutes) {
+        const hours = Math.floor(time / 60);
+        const minutes = Math.floor(time % 60);
+        times.push(
+          `${hours.toString().padStart(2, "0")}:${minutes
+            .toString()
+            .padStart(2, "0")}`
+        );
+      }
     }
     return times;
   };
@@ -129,13 +132,6 @@ const AnalogClock: React.FC = () => {
       <div className="absolute inset-0 border-2 border-black dark:border-white rounded-full">
         {/* Render clock face */}
         {markers.map((marker, index) => {
-          const intervalMinutes =
-            marker.unit === "hours" ? marker.interval * 60 : marker.interval;
-          const displayMarkerTimes = generateMarkerTimes(
-            startTime,
-            endTime,
-            intervalMinutes
-          );
           return (
             <React.Fragment key={index}>
               {/* Render start time marker */}
@@ -149,7 +145,7 @@ const AnalogClock: React.FC = () => {
                   transform: "translate(-75%, -75%)",
                 }}
               />
-              {displayMarkerTimes.map((time, idx) => {
+              {markerTimes.map((time, idx) => {
                 const { x, y } = calculateMarkerPosition(time);
                 return (
                   <div
