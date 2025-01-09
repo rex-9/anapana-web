@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { userController } from "../controllers";
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const { currentUser, setCurrentUser } = useAuth();
   const { t } = useTranslation();
 
@@ -38,4 +38,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

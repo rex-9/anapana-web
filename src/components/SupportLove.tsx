@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import PageLayout from "./PageLayout";
-import { AnalogClock, IconButton, MarkerPopup } from "../components";
+import IconButton from "./IconButton";
 import assets from "../assets";
 import { AppLocales } from "../locales/app_locales";
 import { useTranslation } from "react-i18next";
 
-const Root: React.FC = () => {
+const SupportLove: React.FC = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const { t } = useTranslation();
-
   return (
-    <PageLayout>
-      <div className="w-full flex flex-col md:flex-row justify-center md:gap-48 items-center">
-        <AnalogClock />
-        <MarkerPopup />
-      </div>
+    <>
       <IconButton
         onClick={() => setShowSnackbar(!showSnackbar)}
         icon={
@@ -43,8 +37,8 @@ const Root: React.FC = () => {
           </div>
         </div>
       )}
-    </PageLayout>
+    </>
   );
 };
 
-export default Root;
+export default SupportLove;

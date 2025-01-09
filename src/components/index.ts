@@ -17,3 +17,4 @@ export { default as NavBar } from "./NavBar";
 export { default as ProfileAvatar } from "./ProfileAvatar";
 export { default as AnalogClock } from "./AnalogClock";
 export { default as MarkerPopup } from "./MarkerPopup";
+export { default as SupportLove } from "./SupportLove";

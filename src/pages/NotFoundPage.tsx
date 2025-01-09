@@ -4,7 +4,7 @@ import { useAuth } from "../contexts";
 import PageLayout from "./PageLayout";
 import { AppLocales } from "../locales/app_locales";
 
-const NotFound: React.FC = () => {
+const NotFoundPage: React.FC = () => {
   const { token } = useAuth();
 
   return (
@@ -22,4 +22,4 @@ const NotFound: React.FC = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

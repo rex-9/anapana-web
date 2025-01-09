@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import Toast from "../components/Toast";
+import { useTranslation } from "react-i18next";
 
 type ToastType = "success" | "warning" | "error";
 
@@ -16,9 +17,10 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({
     type: ToastType;
     message: string;
   } | null>(null);
+  const { t } = useTranslation();
 
   const showToast = (type: ToastType, message: string) => {
-    setToast({ type, message });
+    setToast({ type, message: t(message) });
     setTimeout(() => setToast(null), 3000); // Hide toast after 3 seconds
   };
 

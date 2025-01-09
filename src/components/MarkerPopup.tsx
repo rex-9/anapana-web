@@ -18,7 +18,7 @@ const MarkerPopup: React.FC = () => {
   const handleAddMarker = () => {
     const color = "#" + Math.floor(Math.random() * 16777215).toString(16);
     addMarker({ interval, unit, color });
-    showToast("success", "Let's start the training of mindfulness!");
+    showToast("success", AppLocales.TimerStartMessage);
   };
 
   const playSound = () => {

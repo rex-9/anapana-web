@@ -38,4 +38,5 @@ export enum AppLocales {
   TimerMinutes = "timer_minutes",
   TimerHours = "timer_hours",
   WelcomeDonations = "welcome_donations",
+  TimerStartMessage = "timer_start_message",
 }
