@@ -7,10 +7,10 @@ import {
   ConfirmEmail,
   ForgotPassword,
   ResetPassword,
-  NotFound,
-  Home,
-  Root,
-  Profile,
+  NotFoundPage,
+  HomePage,
+  RootPage,
+  ProfilePage,
 } from "../pages";
 import {
   Route,
@@ -23,16 +23,19 @@ const RouteManager = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path={AppRoutes.client.public.ROOT}>
-        <Route index element={<Root />} />
+        <Route index element={<RootPage />} />
         <Route element={<ProtectedRoute />}>
           <Route
             path={AppRoutes.client.protected.SIGN_OUT}
             element={<SignOut />}
           />
-          <Route path={AppRoutes.client.protected.HOME} element={<Home />} />
+          <Route
+            path={AppRoutes.client.protected.HOME}
+            element={<HomePage />}
+          />
           <Route
             path={AppRoutes.client.protected.PROFILE}
-            element={<Profile />}
+            element={<ProfilePage />}
           />
         </Route>
         <Route element={<PublicRoute />}>
@@ -51,7 +54,7 @@ const RouteManager = () => {
           <Route path={AppRoutes.client.public.SIGN_IN} element={<SignIn />} />
           <Route path={AppRoutes.client.public.SIGN_UP} element={<SignUp />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
   );
