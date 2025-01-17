@@ -104,7 +104,7 @@ const AnalogClock: React.FC = () => {
 
   const playSound = () => {
     if (audioAllowed) {
-      const audio = new Audio(assets.sounds.note.src);
+      const audio = new Audio(assets.sounds.chime.src);
       audio.play();
     }
   };
