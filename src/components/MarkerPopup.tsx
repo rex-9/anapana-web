@@ -22,7 +22,7 @@ const MarkerPopup: React.FC = () => {
   };
 
   const playSound = () => {
-    const audio = new Audio(assets.sounds.note.src);
+    const audio = new Audio(assets.sounds.chime.src);
     audio.play();
   };
 

@@ -16,7 +16,8 @@ import {
 } from "./icons"; // Lib icons
 
 // Import sounds
-import note from "./sounds/note.mp3";
+import bell from "./sounds/bell.mp3";
+import chime from "./sounds/chime.mp3";
 
 // Define TypeScript interfaces
 interface AssetProps {
@@ -64,11 +65,16 @@ const videos: Record<string, AssetProps> = {
 };
 
 const sounds: Record<string, AssetProps> = {
-  note: {
-    src: note,
-    alt: "note sound alt",
-    title: "note sound title",
+  bell: {
+    src: bell,
+    alt: "bell sound alt",
+    title: "bell sound title",
   },
+  chime: {
+    src: chime,
+    alt: "chime sound alt",
+    title: "chime sound alt",
+  }
 };
 
 export default { images, icons, videos, sounds };
